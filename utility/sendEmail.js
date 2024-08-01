@@ -12,8 +12,8 @@ class SendEmail {
     // Create a transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       service: "gmail",
-      host: "smtp.gmail.com",
-      port: 465 || process.env.EMAIL_PORT,
+      host: process.env.EMAIL_HOST || "smtp.gmail.com",
+      port: process.env.EMAIL_PORT || 465,
       secure: true,
       auth: {
         user: "jomlaa.shp@gmail.com", // Replace with your email
@@ -29,7 +29,8 @@ class SendEmail {
     }
     let mailOptions = {
       from: "jomlaa.shp@gmail.com", // Sender address
-      to: `${this.user.email}`, // List of recipients
+      to: "jomlaa.shp@gmail.com", // Sender address
+      // to: `${this.user.email}`, // List of recipients
       subject: "reset your account password", // Subject line
       html: `<p>hello ${this.user.firstName} if you are forgot your password or lost it please use the link below to reset your password <br>
       <a href=${link}>reset your password</a>
